@@ -392,9 +392,9 @@
             <div class="day-selector">
                 <h3>📅 Selecciona el día</h3>
                 <div class="day-buttons">
-                    <button class="day-btn" data-day="jueves">Jueves 21</button>
-                    <button class="day-btn active" data-day="viernes">Viernes 22</button>
-                    <button class="day-btn" data-day="sabado">Sábado 23</button>
+                    <button class="day-btn active" data-day="jueves">Jueves 21</button>
+                    <button class="day-btn" data-day="viernes">Viernes 22</button>
+                    <button class="day-btn" data-day="sábado">Sábado 23</button>
                     <button class="day-btn" data-day="domingo">Domingo 24</button>
                 </div>
             </div>
@@ -468,7 +468,7 @@
         let currentMarkers = [];
         let currentRoutes = [];
         let currentTimeMarkers = [];
-        let currentDay = 'viernes';
+        let currentDay = 'jueves'; // Changed to 'jueves' as default
         let currentTime = null;
         let afternoonMenuExpanded = false;
         let routeCache = new Map();
@@ -482,6 +482,22 @@
                 descripcion: "C. de Mariano Pola, 49, Gijón",
                 tipo: "alojamiento",
                 icono: "🏠"
+            },
+            {
+                nombre: "Centro Gijón",
+                lat: 43.538542,
+                lng: -5.664308,
+                descripcion: "Casco viejo de Gijón",
+                tipo: "ciudad",
+                icono: "🏛️"
+            },
+            {
+                nombre: "Aeropuerto Oviedo",
+                lat:  43.558473,
+                lng:  -6.031938,
+                descripcion: "Aeropuerto",
+                tipo: "aeropuerto",
+                icono: "🛬"
             },
             {
                 nombre: "Los Cauces - Arriondas",
@@ -501,23 +517,23 @@
                 icono: "1️⃣"
                    },
                    {
-                        nombre: "Fries",
-                        lat: 43.424659,
-                        lng: -5.083979,
-                        descripcion: "2ª parada descenso del Sella",
-                        tipo: "actividad",
-                        icono: "2️⃣"
+                           nombre: "Fries",
+                           lat: 43.424659,
+                           lng: -5.083979,
+                           descripcion: "2ª parada descenso del Sella",
+                tipo: "actividad",
+                icono: "2️⃣"
                    },
                    {
-                        nombre: "Llovio",
-                        lat: 43.438985,
-                        lng: -5.055949,
-                        descripcion: "3ª parada descenso del Sella",
-                        tipo: "actividad",
-                        icono: "3️⃣"
+                           nombre: "Llovio",
+                           lat: 43.438985,
+                           lng: -5.055949,
+                           descripcion: "3ª parada descenso del Sella",
+                tipo: "actividad",
+                icono: "3️⃣"
                    },
                    {
-                        nombre: "Mesón El Labrador",
+                           nombre: "Mesón El Labrador",
                 lat: 43.461315,
                 lng: -5.060003,
                 descripcion: "Restaurante en Ribadesella",
@@ -550,6 +566,14 @@
                 icono: "🏘️"
             },
             {
+                nombre: "Playa de San Lorenzo",
+                lat:  43.541046,
+                lng:  -5.650069,
+                descripcion: "Playa de Gijón - Buen ambiente surfero - Varias escuelas para alquilar tablas",
+                tipo: "surf",
+                icono: "🏄"
+            },
+            {
                 nombre: "Playa de Santa Marina",
                 lat: 43.465991,
                 lng: -5.071141,
@@ -566,11 +590,63 @@
                 icono: "🏄"
             },
             {
+                nombre: "Playa de Salinas",
+                lat:  43.578402,
+                lng:  -5.958668,
+                descripcion: "Olas suaves en verano - Buen fondo - Ambiente local.",
+                tipo: "surf",
+                icono: "🏄"
+            },
+            {
+                nombre: "Playa de Xagó",
+                lat:  43.604592,
+                lng:  -5.919337,
+                descripcion: "Playa salvaje - Dunas - Sin urbanizaciones",
+                tipo: "surf",
+                icono: "🏄"
+            },
+            {
+                nombre: "El Restallu",
+                lat:  43.537411,
+                lng:  -5.666325,
+                descripcion: "Raciones, sidra, informal 👌💰",
+                link: "https://maps.app.goo.gl/dZSZb3CXcy75G2ez5",
+                tipo: "restaurante",
+                icono: "🍽️"
+            },
+            {
+                nombre: "La Taberna Zíngara",
+                lat:  43.543102,
+                lng:  -5.664966,
+                descripcion: "Cocina asturiana moderna",
+                link: "https://maps.app.goo.gl/mnyzyX7d1nbmDLsx9",
+                tipo: "restaurante",
+                icono: "🍽️"
+            },
+            {
+                nombre: "Antiguo Zabala",
+                lat:  43.545967,
+                lng:  -5.662946,
+                descripcion: "Clásico gijonés - pescados",
+                link: "https://maps.app.goo.gl/ESW5MXiy6vnXAm4z6",
+                tipo: "restaurante",
+                icono: "🍽️"
+            },
+            {
                 nombre: "Casería de Santa Marina",
                 lat: 43.401243,
                 lng: -4.781588,
                 descripcion: "Cachopada de kilo",
                 link: "https://maps.app.goo.gl/3bzBzkMPRqsc5Ytz8",
+                tipo: "restaurante",
+                icono: "🍽️"
+            },
+            {
+                nombre: "La Chalana - Avilés",
+                lat:  43.571463,
+                lng:  -5.923251,
+                descripcion: "Mariscos frescos - pescados - raciones",
+                link: "https://maps.app.goo.gl/ExVWzb36EnguNDHH6",
                 tipo: "restaurante",
                 icono: "🍽️"
             },
@@ -586,11 +662,17 @@
 
         // Itinerary data
         const itinerario = {
+            jueves: {
+                morning: { puntos: ["Aeropuerto Oviedo","Apartamento Gijón"], detalles: "🛬 Llegada a Asturias<br>🚗 Recogida coche de alquiler<br>📍 Traslado al apartamento", color: "#4682b4" },
+                midday: { puntos: ["Apartamento Gijón"], detalles: "🏠 13:00 → Check-in Apartamento Gijón<br>🍽️ Comida de bienvenida en casa<br>🛍️ Instalación y compras básicas", color: "#f1c40f" },
+                afternoon: { puntos: ["Apartamento Gijón", "Playa de San Lorenzo"], detalles: "🌊 Paseo por el paseo marítimo.<br>🏄 Surf en Playa de San Lorenzo.<br>🏖️ Ideal también para bañarse.", color: "#e67e22" },
+                night: { puntos: ["Apartamento Gijón","El Restallu", "La Taberna Zíngara", "Antiguo Zabala"], detalles: "🍽️ Cena en uno de los siguientes restaurantes del centro:<br>&nbsp&nbsp&nbsp• <strong>El Restallu</strong>: 4,5⭐ (4k review).<br>&nbsp&nbsp&nbsp• <strong>La Taberna Zíngara</strong>: 4,5⭐(2k review).<br>&nbsp&nbsp&nbsp• <strong>Casa Zabala</strong>: 4,4⭐(1k review).", color: "#2c3e50" }
+            },
             viernes: {
                 morning: {
                     puntos: ["Apartamento Gijón", "Los Cauces - Arriondas"],
                     puntosRiver: ["Los Cauces - Arriondas", "Toraño", "Fries", "Llovio"],
-                    detalles: "🚗 9:00-10:00 → Traslado en coche a Arriondas.<br>🚣 10:30 → Inicio descenso del Sella.<br>📍Escoger parada:<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp• Toraño (7km - 2,5h)<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp• Fries (14km - 3,5h)<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp• Llovio (17km - 4,5h)<br>💰 30€ por persona (independiente parada).<br>🚐 14:00-15:00 → Fin del recorrido, regreso en furgoneta a Arriondas.",
+                    detalles: "🚗 9:00-10:00 → Salida en coche hacia Arriondas.<br>🚣 10:30 → Inicio descenso del Sella.<br>📍Escoger parada:<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp• <strong>Toraño</strong> (7km - 2,5h).<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp• <strong>Fries</strong> (14km - 3,5h).<br>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp• <strong>Llovio</strong> (17km - 4,5h).<br>💰 30€ por persona (independiente parada).<br>🚐 14:00-15:00 → Fin del recorrido, regreso en furgoneta a Arriondas.",
                     color: "#4682b4"
                 },
                 midday: {
@@ -617,21 +699,15 @@
                     color: "#2c3e50"
                 }
             },
-            jueves: {
-                morning: { puntos: [], detalles: "Llegada y acomodación - Plan libre", color: "#4682b4" },
-                midday: { puntos: [], detalles: "Exploración de Gijón - Plan libre", color: "#f1c40f" },
-                afternoon: { puntos: [], detalles: "Descanso y preparativos - Plan libre", color: "#e67e22" },
-                night: { puntos: [], detalles: "Cena local en Gijón - Plan libre", color: "#2c3e50" }
-            },
-            sabado: {
-                morning: { puntos: [], detalles: "Por planificar...", color: "#4682b4" },
-                midday: { puntos: [], detalles: "Por planificar...", color: "#f1c40f" },
-                afternoon: { puntos: [], detalles: "Por planificar...", color: "#e67e22" },
-                night: { puntos: [], detalles: "Por planificar...", color: "#2c3e50" }
+            sábado: {
+                morning: { puntos: ["Apartamento Gijón", "Playa de Xagó"], detalles: "🚗 11:00 → Salida en coche hacia Playa de Xagó.<br>🏄 Mañana de surf en Playa de Xagó.", color: "#4682b4" },
+                midday: { puntos: ["Playa de Xagó", "La Chalana - Avilés"], detalles: "🍽️ 14:30 → Comida en La Chalana (Avilés).<br>🦞 Especialistas en marisco y pescados.<br>📞 Pendiente confirmar reserva.", color: "#f1c40f" },
+                afternoon: { puntos: ["La Chalana - Avilés", "Playa de Salinas", "Apartamento Gijón"], detalles: "🏖️ 17:00 → Llegada a Playa de Salinas.<br>🚶‍♂️ Paseo marítimo y café.<br>🏄 Opción surf/baño para los más valientes (spot famoso del norte).<br>🚗 19:00 → Vuelta al apartamento.<br>🏠 19:30 → Llegada apartamento.", color: "#e67e22" },
+                night: { puntos: ["Apartamento Gijón", "Centro Gijón", "El Restallu", "La Taberna Zíngara", "Antiguo Zabala"], detalles: "🍻 20:00 → Sidras en el casco viejo.<br><br>🍽️ 21:30 → Cena en el Restallu, La Taberna Zíngara o Antiguo Zabala.<br><br>💃 23:00+ → Copas y fiesta.", color: "#2c3e50" }
             },
             domingo: {
-                morning: { puntos: [], detalles: "Última mañana - Check out", color: "#4682b4" },
-                midday: { puntos: [], detalles: "Regreso - Viaje de vuelta", color: "#f1c40f" },
+                morning: { puntos: [], detalles: "Check out", color: "#4682b4" },
+                midday: { puntos: [], detalles: "Sanseacabó", color: "#f1c40f" },
                 afternoon: { puntos: [], detalles: "Viaje de vuelta", color: "#e67e22" },
                 night: { puntos: [], detalles: "Llegada a casa", color: "#2c3e50" }
             }
@@ -978,7 +1054,7 @@
                 const allPoints = [];
                 let detailsHtml = `<strong>🗺️ Ruta completa del ${day === 'viernes' ? 'Viernes 22' : day}</strong><br><br>`;
 
-                const timeSlots = ['morning', 'midday', 'afternoon_option1', 'afternoon_option2', 'night'];
+                const timeSlots = ['morning', 'midday', 'afternoon','afternoon_option1', 'afternoon_option2', 'night'];
                 
                 for (const timeSlot of timeSlots) {
                     const timeData = dayData[timeSlot];
